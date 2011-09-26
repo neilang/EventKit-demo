@@ -19,16 +19,14 @@
 
 @synthesize events = _events;
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
     
     self.title = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleDisplayName"];
     
     // Add a refresh button
-    UIBarButtonItem * refresh = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh 
-                                                                              target:self 
-                                                                              action:@selector(updateFeed:)];
+    UIBarButtonItem * refresh = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(updateFeed:)];
+    
     self.navigationItem.rightBarButtonItem = refresh;
     [refresh release];
     
@@ -36,7 +34,7 @@
     [self updateFeed:nil];
 }
 
--(IBAction)updateFeed:(id)sender{
+-(IBAction)updateFeed:(id)sender {
     
     // Create a request to fetch the feed
     NSURL *url = [NSURL URLWithString:JSON_EVENT_FEED];
@@ -68,18 +66,15 @@
     
 }
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [self.events count];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"Cell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -94,8 +89,7 @@
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     // If an event is tapped, we want to let the user add it to their calendar
     
     NSDictionary *eventData = [self.events objectAtIndex:indexPath.row];
@@ -136,7 +130,7 @@
     
 }
 
--(void)eventEditViewController:(EKEventEditViewController *)controller didCompleteWithAction:(EKEventEditViewAction)action{
+-(void)eventEditViewController:(EKEventEditViewController *)controller didCompleteWithAction:(EKEventEditViewAction)action {
     
     switch (action) {
 		case EKEventEditViewActionCanceled:
@@ -158,15 +152,13 @@
     [self dismissModalViewControllerAnimated:YES];
 }
 
-- (void)viewDidUnload
-{
+- (void)viewDidUnload {
     [super viewDidUnload];
-
     self.events = nil;
 }
 
-- (void)dealloc
-{
+- (void)dealloc {
+    [_events release];
     [super dealloc];
 }
 

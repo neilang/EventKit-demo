@@ -1,0 +1,14 @@
+h1. Instructions
+
+Download the code via terminal with this command:
+
+bc. git clone git@github.com:neilang/EventKit-demo.git
+
+You will also need to download and run the events server:
+
+bc. git clone git@github.com:neilang/EventsFeed.git
+cd EventsFeed
+rake db:migrate
+rails s
+
+Run the application. Hopefully everything works :)
